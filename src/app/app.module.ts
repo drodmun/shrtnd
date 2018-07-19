@@ -7,12 +7,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
+import { RequesterComponent } from './requester/requester.component';
+import { ResponserComponent } from './responser/responser.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderBarComponent,
-    FooterBarComponent
+    FooterBarComponent,
+    RequesterComponent,
+    ResponserComponent
   ],
   imports: [
     BrowserModule,

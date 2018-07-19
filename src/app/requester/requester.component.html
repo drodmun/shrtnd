@@ -1,0 +1,88 @@
+
+
+    <form name="form"  [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-3">
+              <label for="basic-url">Days to keep <small>(0 for a year)</small></label>
+              <div class="md-form input-group">
+                <input  type="number" class="form-control border" mdbInputDirective
+                        aria-label="Days to keep link available" 
+                        data-error="Max 365, Min 1" data-success="Ok!"
+                        formControlName="days" name="days" />
+              </div>
+          </div>
+          <div class="col-md-9">
+            <label for="basic-url">URL that will be SHoRTeNeD</label>
+            <div class="md-form input-group">
+              <input  type="url" class="form-control border" mdbInputDirective
+                      aria-label="URL to SHoRTeN" 
+                      formControlName="url" name="url"
+                      data-error="URL must be a valid one" data-success="Good to go!"
+                      placeholder="[https://]www.longurl.com/params/" />
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-link"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" [disabled]="form.invalid"
+                    class="btn btn-light btn-lg btn-block">Go!</button>
+          </div>
+        </div>
+  
+        <br />
+        <br />
+  
+       <div class="row">
+          <div class="col-md-6">
+            <!--Card-->
+            <div class="card card-cascade wider">
+              <!--Card image-->
+              <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+                <br />
+                <img src="assets/img/share.png" class="img-fluid rounded mx-auto d-block" alt="Card image with a tree in a middle of a lake.">
+                <a>
+                    <div class="mask"></div>
+                </a>
+              </div>
+  
+              <!--Card content-->
+              <div class="card-body card-body-cascade text-center">
+                <!--Title-->
+                <h4 class="card-title">SHoRTeN your URL</h4>
+                <!--Text-->
+                <p class="card-text">Shorten your URL so it’s ready to be shared everywhere.</p>
+              </div>
+            </div>
+            <!--/.Card-->
+          </div>
+          <div class="col-md-6">
+            <!--Card-->
+            <div class="card card-cascade wider">
+              <!--Card image-->
+              <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+                <br />
+                <img src="assets/img/url-shortening.png" class="img-fluid rounded mx-auto d-block" alt="Card image with a tree in a middle of a lake.">
+                <a>
+                    <div class="mask"></div>
+                </a>
+              </div>
+  
+              <!--Card content-->
+              <div class="card-body card-body-cascade text-center">
+                <!--Title-->
+                <h4 class="card-title">Track</h4>
+                <!--Text-->
+                <p class="card-text">Track acceses, we help you know how many times your link has been used.</p>
+                <!-- <a class="btn btn-primary waves-light" mdbWavesEffect>Button</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </form>
