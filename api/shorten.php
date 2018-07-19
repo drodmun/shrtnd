@@ -6,11 +6,6 @@
 
 <?php
 
-	$return = array(
-		'errors' => array(),
-		'value'  => ''
-	);
-
 	# Access data
 	$db_server 	 = '';
 	$db_user 	 = '';
@@ -18,7 +13,9 @@
 	$db_name 	 = '';
 
 	# Connection establishment
-	if(mysql_connect($db_server, $db_user, $db_passwort)) {
+	$con = mysql_connect($db_server, $db_user, $db_passwort);
+
+	if ($con) {
 		// echo 'Server connection successful, select database...';
 
 		if(mysql_select_db($db_name)) {
@@ -30,16 +27,17 @@
 			$sql 	= "INSERT INTO SHRTND_URL VALUES('$id','$url','$key', NOW())";
 			
 			mysql_query($sql, $con);
-			mysql_close($con);
 
-			$return['value'] = $key;
+			header('Content-type: application/json');
+			echo json_encode(["message" => $key]);
 		} else {
-			array_push($return['errors'],'The specified database could not be selected, please check the information you have entered!');
+			http_response_code(500);
+			die();
+			// $return['value'] = 'The specified database could not be selected, please check the information you have entered!');
 		}
 	} else {
-		array_push($return['errors'],'Connection not possible, please check data! MYSQL-error: '.mysql_error());
+		http_response_code(500);
+		die();
+		// $return['value'] = 'Connection not possible, please check data! MYSQL-error: '.mysql_error());
 	}
-
-	header('Content-type: application/json');
-	echo json_encode($return);
 ?>
