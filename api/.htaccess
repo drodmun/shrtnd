@@ -1,0 +1,5 @@
+Options +FollowSymLinks -Indexes -MultiViews
+RewriteEngine on
+
+# Internally rewrite shortened URL requests to de-shortened URL lookup script filepath plus query string
+RewriteRule ^([\w\d]{4})$ decoder.php?key=$1 [L]
