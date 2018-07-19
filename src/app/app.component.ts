@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { Component, Output } from '@angular/core';
 export class AppComponent {
   requested = false;
 
-  receiveResponse($event) {
+  onRequested($event) {
     this.requested = $event;
   }
 }

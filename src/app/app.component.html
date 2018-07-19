@@ -27,7 +27,7 @@
       
     </div>
     <ng-template #showRequester>
-      <app-requester (responseEvent)="receiveResponse($event)"></app-requester>
+      <app-requester (requested)="onRequested($event)"></app-requester>
     </ng-template>
     
     
