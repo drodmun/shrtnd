@@ -24,12 +24,21 @@
 			$url	= mysql_real_escape_string($_REQUEST['url']); 
 			$id		= rand(10000,99999);
 			$key 	= base_convert($id, 20, 36);
-			$sql 	= "INSERT INTO SHRTND_URL VALUES('$id','$url','$key', NOW())";
+			$sql 	= "INSERT IGNORE INTO SHRTND_URL VALUES('$id','$url','$key', NOW())";
 			
 			mysql_query($sql, $con);
 
+			// All going good, retrieve key (in case already existed)    
+			$sql = 'SELECT * FROM SHRTND_URL WHERE URL = \''.$url.'\'';
+    
+			$result = mysql_query($sql, $con);
+			while($row = mysql_fetch_array($result)) {
+			  	$res = $row['UNIQUE_KEY'];
+				break;
+			}
+
 			header('Content-type: application/json');
-			echo json_encode(["message" => $key]);
+			echo json_encode(["message" => $res]);
 		} else {
 			http_response_code(500);
 			die();
