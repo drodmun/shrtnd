@@ -22,12 +22,19 @@
 
         <br />
 
-        <share-buttons [theme]="'material-light'"
-                       [include]="['facebook','twitter','google','linkedin','pinterest','reddit','tumblr','whatsapp','messenger','telegram','vk','stumble','xing','sms','email','copy','print']"
-                       [exclude]="['copy','print']"
-                       [showText]="true"
-                       [size]="10"
-                       [url]="'shortUrl'"
-       ></share-buttons>
+        <div class="view">
+
+          <share-buttons [theme]="'material-light'"
+                         [include]="['facebook','twitter','google','linkedin','pinterest','reddit','tumblr','whatsapp','messenger','telegram','vk','stumble','xing','sms','email','copy','print']"
+                         [exclude]="['copy','print']"
+                         [showText]="true"
+                         [size]="10"
+                         [url]="'shortUrl'"></share-buttons>
+
+          <div class="mask flex-center rgba-grey-strong">
+            <p class="white-text">Work Ip Progess</p>
+          </div>
+
+        </div>
     </div>
   </div>
