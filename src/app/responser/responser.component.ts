@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { InvokeFunctionExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-responser',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./responser.component.css']
 })
 export class ResponserComponent implements OnInit {
+  @Input() linkURL: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.linkURL = 'https://shrtnd.ml/' + this.linkURL;
   }
 
 }

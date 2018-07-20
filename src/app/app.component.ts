@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  requested = false;
+  linkURL: string;
 
   onRequested($event) {
-    this.requested = $event;
+    this.linkURL = $event;
   }
 }

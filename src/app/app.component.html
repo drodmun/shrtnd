@@ -2,35 +2,19 @@
 
 <!-- Main -->
 <main class="container">
-    <br />
-    <br />
-    <br />
-    <br />
+  <div class="content clearfix">
+    
+    <br /> <br /> <br /> <br />
 
-    <div class="row">
-      <div class="col-md-12">
-          <div class="text-center">
-              <ul class="list-unstyled">
-                  <li>
-                      <h2 class="h1 display-4 font-bold">SHoRTeNeD<sup>&copy;</sup></h2></li>
-                  <li>
-                      <h5>A easy way to make shorter your url to share and follow its stats</h5>
-                  </li>
-              </ul>
-          </div>
-      </div>
+    <div *ngIf="linkURL; else showRequester">
+        <app-responser [linkURL]="linkURL"></app-responser>
     </div>
-    <br />
-    <br />
 
-    <div *ngIf="requested; else showRequester">
-      
-    </div>
     <ng-template #showRequester>
       <app-requester (requested)="onRequested($event)"></app-requester>
     </ng-template>
     
-    
+  </div>
 </main>
 <!-- /.Main -->
 

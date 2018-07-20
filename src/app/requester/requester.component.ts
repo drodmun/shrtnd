@@ -10,7 +10,7 @@ import { InvokeFunctionExpr } from '@angular/compiler';
   styleUrls: ['./requester.component.css']
 })
 export class RequesterComponent implements OnInit {
-  @Output() requested = new EventEmitter<boolean>();
+  @Output() requested = new EventEmitter<string>();
 
   private options = { headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'}) };
   private urlRegex = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
@@ -20,8 +20,7 @@ export class RequesterComponent implements OnInit {
     url : new FormControl(null, [Validators.required, Validators.pattern(this.urlRegex)])
   });
 
-  restItems: any;
-  apiURL = 'http://api.damianrodriguez.es/shrtnd/shorten.php';
+  private apiURL = 'http://api.damianrodriguez.es/shrtnd/shorten.php';
 
   constructor(private http: HttpClient) { }
 
@@ -37,17 +36,13 @@ export class RequesterComponent implements OnInit {
       .append('days', this.form.get('days').value);
 
     this.http.post(this.apiURL, params, this.options).toPromise()
-           .then(() => this.requested.emit(true))
+           .then((result: string) => this.requested.emit(result['message']))
            .catch(this.handleErrorPromise);
   }
 
   handleErrorPromise (error: HttpResponse<string> | any) {
     console.error(error);
     return Promise.reject(error);
-  }
-
-  sendResponse(requested: boolean) {
-    this.requested.emit(requested);
   }
 
 }

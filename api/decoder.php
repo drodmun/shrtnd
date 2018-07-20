@@ -14,7 +14,9 @@
 	$db_name 	 = '';
 
 	# Connection establishment
-	if(mysql_connect($db_server, $db_user, $db_password)) {
+	$con = mysql_connect($db_server, $db_user, $db_passwort);
+
+	if ($con) {
 		// echo 'Server connection successful, select database...';
 
 		if(mysql_select_db($db_name)) {
@@ -24,7 +26,7 @@
     
       $sql = 'SELECT * FROM SHRTND_URL WHERE UNIQUE_KEY = "$key"';
     
-      $result = mysql_query($sql);
+      $result = mysql_query($sql, $con);
     
       while($row = mysql_fetch_array($result)) {
         $res = $row['url'];
