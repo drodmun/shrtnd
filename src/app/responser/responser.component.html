@@ -1,0 +1,32 @@
+<div class="row text-center">
+    <div class="col-12">
+        <p class="h4 display-8 font-bold">Your SHoRTeNeD link is ready!</p>
+
+        <div class="md-form input-group">
+          <input type="text" class="form-control border" [value]="linkURL" />
+          <div class="input-group-btn">
+            <button class="btn btn-light btn-lg waves-light" type="button" mdbWavesEffect>
+              <i class="fa fa-copy"></i> &nbsp;copy
+            </button>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row text-center clearfix">
+    <div class="col-12">
+        <p class="h4 display-8 font-bold">... or maybe you prefer to share it in Social Media...</p>
+
+        <br />
+
+        <share-buttons [theme]="'material-light'"
+                       [include]="['facebook','twitter','google','linkedin','pinterest','reddit','tumblr','whatsapp','messenger','telegram','vk','stumble','xing','sms','email','copy','print']"
+                       [exclude]="['copy','print']"
+                       [showText]="true"
+                       [size]="10"
+                       [url]="'shortUrl'"
+       ></share-buttons>
+    </div>
+  </div>

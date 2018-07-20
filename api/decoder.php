@@ -5,7 +5,6 @@
 ?>
 
 <?php
-  $return = array('errors' => array(), 'value' => '' );
 
 	# Access data
 	$db_server 	 = '';
@@ -14,31 +13,36 @@
 	$db_name 	 = '';
 
 	# Connection establishment
-	if(mysql_connect($db_server, $db_user, $db_password)) {
+	$con = mysql_connect($db_server, $db_user, $db_passwort);
+
+	if ($con) {
 		// echo 'Server connection successful, select database...';
 
 		if(mysql_select_db($db_name)) {
 			// echo 'Server connection successful, select database ...';
+			$uniqueKey = mysql_real_escape_string($_REQUEST["key"]);
   
-      $key= mysql_real_escape_string($_REQUEST["key"]);
+			$sql = 'SELECT * FROM SHRTND_URL WHERE UNIQUE_KEY = \''.$uniqueKey.'\'';
     
-      $sql = 'SELECT * FROM SHRTND_URL WHERE UNIQUE_KEY = "$key"';
-    
-      $result = mysql_query($sql);
-    
+      $result = mysql_query($sql, $con);
       while($row = mysql_fetch_array($result)) {
-        $res = $row['url'];
-        header("location:".$res);
+				$urlLink = $row['URL'];
+
+				if($ret = parse_url($row['URL']) ) {
+					if(!isset($ret["scheme"]) ) {
+						$urlLink = "http://{$urlLink}";
+					}
+				}
       }
 
 			mysql_close($con);
+
+			echo "<script> location.href='".$urlLink."'; </script>";
+        	exit;
 		} else {
 			array_push($return['errors'],'The specified database could not be selected, please check the information you have entered!');
 		}
 	} else {
 		array_push($return['errors'],'Connection not possible, please check data! MYSQL-error: '.mysql_error());
 	}
-	
-	header('Content-type: application/json');
-	echo json_encode($return);
 ?>

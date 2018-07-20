@@ -6,11 +6,6 @@
 
 <?php
 
-	$return = array(
-		'errors' => array(),
-		'value'  => ''
-	);
-
 	# Access data
 	$db_server 	 = '';
 	$db_user 	 = '';
@@ -18,7 +13,9 @@
 	$db_name 	 = '';
 
 	# Connection establishment
-	if(mysql_connect($db_server, $db_user, $db_passwort)) {
+	$con = mysql_connect($db_server, $db_user, $db_passwort);
+
+	if ($con) {
 		// echo 'Server connection successful, select database...';
 
 		if(mysql_select_db($db_name)) {
@@ -27,19 +24,29 @@
 			$url	= mysql_real_escape_string($_REQUEST['url']); 
 			$id		= rand(10000,99999);
 			$key 	= base_convert($id, 20, 36);
-			$sql 	= "INSERT INTO SHRTND_URL VALUES('$id','$url','$key', NOW())";
+			$sql 	= "INSERT IGNORE INTO SHRTND_URL VALUES('$id','$url','$key', NOW())";
 			
 			mysql_query($sql, $con);
-			mysql_close($con);
 
-			$return['value'] = $key;
+			// All going good, retrieve key (in case already existed)    
+			$sql = 'SELECT * FROM SHRTND_URL WHERE URL = \''.$url.'\'';
+    
+			$result = mysql_query($sql, $con);
+			while($row = mysql_fetch_array($result)) {
+			  	$res = $row['UNIQUE_KEY'];
+				break;
+			}
+
+			header('Content-type: application/json');
+			echo json_encode(["message" => $res]);
 		} else {
-			array_push($return['errors'],'The specified database could not be selected, please check the information you have entered!');
+			http_response_code(500);
+			die();
+			// $return['value'] = 'The specified database could not be selected, please check the information you have entered!');
 		}
 	} else {
-		array_push($return['errors'],'Connection not possible, please check data! MYSQL-error: '.mysql_error());
+		http_response_code(500);
+		die();
+		// $return['value'] = 'Connection not possible, please check data! MYSQL-error: '.mysql_error());
 	}
-
-	header('Content-type: application/json');
-	echo json_encode($return);
 ?>
