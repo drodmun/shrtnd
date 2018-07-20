@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@ngx-share/button/styles/share-buttons';
+@import '~@ngx-share/button/styles/themes/default/default-theme';
+@import '~@ngx-share/button/styles/themes/material/material-dark-theme';
+@import '~@ngx-share/button/styles/themes/material/material-light-theme';
+@import '~@ngx-share/button/styles/themes/circles/circles-dark-theme';
+@import '~@ngx-share/button/styles/themes/circles/circles-light-theme';
+@import '~@ngx-share/button/styles/themes/classic/classic-dark-theme';
+@import '~@ngx-share/button/styles/themes/classic/classic-light-theme';
+@import '~@ngx-share/button/styles/themes/modern/modern-dark-theme';
+@import '~@ngx-share/button/styles/themes/modern/modern-light-theme';
+@import '~@ngx-share/button/styles/themes/outline/outline-theme';

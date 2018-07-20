@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
@@ -23,7 +24,9 @@ import { ResponserComponent } from './responser/responser.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    HttpClientJsonpModule, // (Optional) For linkedIn & Tumblr counts
+    MDBBootstrapModule.forRoot(),
+    ShareButtonsModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [],
