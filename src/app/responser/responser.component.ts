@@ -15,4 +15,9 @@ export class ResponserComponent implements OnInit {
     this.linkURL = 'https://shrtnd.ml/' + this.linkURL;
   }
 
+  copyToClipboard(element) {
+      element.select();
+      document.execCommand('copy');
+      element.setSelectionRange(0, 0);
+  }
 }

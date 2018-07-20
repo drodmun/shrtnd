@@ -3,9 +3,10 @@
         <p class="h4 display-8 font-bold">Your SHoRTeNeD link is ready!</p>
 
         <div class="md-form input-group">
-          <input type="text" class="form-control border" [value]="linkURL" />
+          <input type="text" class="form-control border" [value]="linkURL" #urlLink/>
           <div class="input-group-btn">
-            <button class="btn btn-light btn-lg waves-light" type="button" mdbWavesEffect>
+            <button class="btn btn-light btn-lg waves-light" type="button" mdbWavesEffect
+                    (click)="copyToClipboard(urlLink)">
               <i class="fa fa-copy"></i> &nbsp;copy
             </button>
           </div>
