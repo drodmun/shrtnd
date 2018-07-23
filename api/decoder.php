@@ -11,7 +11,7 @@
 	$db_user 	 = '';
 	$db_passwort = '';
 	$db_name 	 = '';
-
+  
 	# Connection establishment
 	$con = mysql_connect($db_server, $db_user, $db_passwort);
 
@@ -21,11 +21,11 @@
 		if(mysql_select_db($db_name)) {
 			// echo 'Server connection successful, select database ...';
 			$uniqueKey = mysql_real_escape_string($_REQUEST["key"]);
-  
+			
 			$sql = 'SELECT * FROM SHRTND_URL WHERE UNIQUE_KEY = \''.$uniqueKey.'\'';
-    
-      $result = mysql_query($sql, $con);
-      while($row = mysql_fetch_array($result)) {
+			
+			$result = mysql_query($sql, $con);
+			while($row = mysql_fetch_array($result)) {
 				$urlLink = $row['URL'];
 
 				if($ret = parse_url($row['URL']) ) {
@@ -33,12 +33,19 @@
 						$urlLink = "http://{$urlLink}";
 					}
 				}
-      }
+			}
 
 			mysql_close($con);
+			
+			header("Location: ".$urlLink);
 
-			echo "<script> location.href='".$urlLink."'; </script>";
-        	exit;
+			echo '<script type="text/javascript">';
+			echo '	if(top != self) top.location.href="'.$urlLink.'";';
+			echo '	else if(parent != self) parent.location.href="'.$urlLink.'";';
+			echo '	else window.location.href="'.$urlLink.'";';
+			echo '</script>';
+			
+			exit;
 		} else {
 			array_push($return['errors'],'The specified database could not be selected, please check the information you have entered!');
 		}
