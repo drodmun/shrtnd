@@ -12,7 +12,7 @@ export class ResponserComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.linkURL = 'shrtnd.ml/' + this.linkURL;
+    this.linkURL = 'shrtnd.damianrodriguez.es/' + this.linkURL;
   }
 
   copyToClipboard(element) {
