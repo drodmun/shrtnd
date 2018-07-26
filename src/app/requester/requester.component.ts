@@ -20,7 +20,7 @@ export class RequesterComponent implements OnInit {
     url : new FormControl(null, [Validators.required, Validators.pattern(this.urlRegex)])
   });
 
-  private apiURL = 'http://api.damianrodriguez.es/shrtnd/shorten.php';
+  private apiURL = 'http://api.domain.es/shorten.php';
 
   constructor(private http: HttpClient) { }
 

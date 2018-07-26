@@ -1,7 +1,16 @@
-Options +FollowSymLinks -Indexes -MultiViews
-RewriteEngine On
-# RewriteBase /shrtnd/
+<IfModule mod_rewrite.c>
+    # Options +FollowSymLinks -Indexes -MultiViews
+    Options Indexes FollowSymLinks
+    RewriteEngine On
+    
+    RewriteRule ^([\w\d]{4})$ http://api.domain.es/decoder.php?key=$1 [NC,L]
 
-# Internally rewrite shortened URL requests to de-shortened URL lookup script filepath plus query string
-RewriteRule !^/api$ - [L]
-RewriteRule ^([\w\d]{4})$ decoder.php?key=$1 [L]
+    RewriteRule !^/api$ - [NC,L]
+    RewriteRule !^([\w\d]{4})$ - [NC,L]
+    RewriteRule ^index\.html$ - [NC,L]
+    
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
+</IfModule>
